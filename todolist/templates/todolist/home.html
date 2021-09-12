@@ -5,5 +5,9 @@
 {% endblock %}
 
 {% block content %}
-    địt mẹ mày
+<ul>
+    {% for item in list %}
+        <li>{{ item.name }} - {{ item.id }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
