@@ -5,9 +5,22 @@
 {% endblock %}
 
 {% block content %}
-<ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">List</th>
+      <th scope="col">Number of Item</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for item in list %}
-        <li>{{ item.name }} - {{ item.id }}</li>
+        <tr>
+          <th scope="row">{{ item.id }}</th>
+          <td><a href="/{{ item.id }}">{{ item.name }}</a></td>
+          <td>{{ item.item_set.count }}</td>
+        </tr>
     {% endfor %}
-</ul>
+  </tbody>
+</table>
 {% endblock %}
