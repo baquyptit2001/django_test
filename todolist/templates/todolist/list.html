@@ -5,14 +5,36 @@
 {% block content %}
     <h1>{{ list.name }}</h1>
     <form method="POST">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Complete</th>
+                <th scope="col">Info</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in list.item_set.all %}
+                <tr>
+                    <td>
+                        {% if item.complete == True %}
+                            <input type="checkbox" name="c{{ item.id }}" id="" value="clicked" checked>
+                        {% else %}
+                            <input type="checkbox" name="c{{ item.id }}" id="" value="clicked">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ item.text }}
+                    </td>
+                    <td>
+                        <a href="/itemDelete/{{ item.id }}">Delete</a>
+                        <a>Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         {% csrf_token %}
-        <ul>
-        {% for item in list.item_set.all %}
-            <!-- {% if not item.complete %} -->
-            <li><input type="checkbox" name="c{{ item.id }}" id="" value="clicked">{{ item.text }}</li>
-            <!-- {% endif %} -->
-        {% endfor %}
-        </ul>
         <button type="submit" name="save" value="save">Save</button>
         <input type="text" name="item">
         <button type="submit" name="newItem" value="add">Add Item</button>

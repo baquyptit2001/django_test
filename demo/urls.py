@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from register import views as v
 
 import todolist
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("todolist.urls")),
+    path('register/', v.register, name="Register"),
+    path('login/', v.log_in, name="Login"),
+    path('logout/', v.log_out, name="Logout"),
 ]

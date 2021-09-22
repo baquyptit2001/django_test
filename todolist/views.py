@@ -1,8 +1,9 @@
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import ToDoList, Item
 from .forms import CreateNewList
+
 
 # Create your views here.
 
@@ -11,9 +12,10 @@ def index(response, id):
     list = ToDoList.objects.get(id=id)
     print(list.item_set.all())
     if response.method == 'POST':
+        print(response.POST)
         if response.POST.get("save"):
             for item in list.item_set.all():
-                if response.POST.get("c"+str(item.id)) == "clicked":
+                if response.POST.get("c" + str(item.id)) == "clicked":
                     item.complete = True
                 else:
                     item.complete = False
@@ -44,3 +46,10 @@ def create(response):
     else:
         form = CreateNewList()
     return render(response, "todolist/create.html", {"form": form})
+
+
+def deleteItem(response, id):
+    obj = get_object_or_404(Item, id=id)
+    obj.delete()
+    list = obj.todolist
+    return HttpResponseRedirect('/' + str(list.id))
