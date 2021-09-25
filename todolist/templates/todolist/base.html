@@ -12,10 +12,10 @@
 <body>
 <ul class="nav justify-content-around bg-dark">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/login">
+        <a class="nav-link" href="{% url 'login' %}">
             {% if request.user.is_authenticated %}
                 {{ request.user.username }}
             {% else %}
@@ -24,7 +24,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
     </li>
 </ul>
 {% block content %}

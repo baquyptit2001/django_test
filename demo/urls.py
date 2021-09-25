@@ -22,7 +22,6 @@ import todolist
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("todolist.urls")),
-    path('register/', v.register, name="Register"),
-    path('login/', v.log_in, name="Login"),
-    path('logout/', v.log_out, name="Logout"),
+    path('accounts/', include("register.urls")),
+    path('registration/', include("django.contrib.auth.urls")),
 ]
